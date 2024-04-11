@@ -1,0 +1,222 @@
+
+
+https://docs.google.com/document/d/10DsTPnqAjdFeWD9vmE3cmUl_cfDiitlSIMfrU9EzIKA/edit#heading=h.vy79jpf9dygn
+
+
+IDEA 1:
+Food Nutrition database, one table for ingredients and their nutrition facts and one table with different foods and the main ingredient for each food group in it and the main cooking method
+
+Table 1
+[Ingredient, protein, fat, carbs]
+[chicken, 8g, 2g, 1g]
+[rice, 1g, 0g, 5g]
+[lettuce, 0g, 0g, 2g]
+[lime, 0g, 0g, 1g]
+
+Table 2
+[Food, protein, grains, fruits, vegetables, dairy]
+[chicken bowl, chicken, rice, lettuce, lime, null]
+
+IDEA 2:
+WE NEED 5 TO 6 TABLES BC WE’RE A GROUP OF 4 💀 ← according to the prof on 3/20
+Apartment bill management system 
+
+Users are other students like us
+We’re admins who manage this system for students
+Goal: help students manage their apartment bill and pay everything on time
+Target audience: students/tenants + landlord
+
+User Table:
+[UserID, Username, Password, UserType (like system admin or user)]
+
+Property Table: ← details of apt
+[PropertyID, Address, TenantID (foreign key to user table)]
+
+Billing Table:
+[BillID, PropertyID (foreign key to property table), BillType (rent/electricity/water/gas), Amount ($), WhereToPay, Month, DueDate]
+
+MAINLY FOR THE ADMIN SIDE:
+Lease Table:
+[LeaseID, PropertyID (foreign key), UserID (foreign key), startDate, endDate, rent, depositAmount ($)]
+
+Maintenance Table:
+[MaintenanceID, PropertyID (foreign key), UserID (foreign key), IssueCategory, Date]
+
+Users would be able to register their properties and track their rent, electricity, water, and gas consumption
+
+Canvas requirements
+
+
+CHOSEN IDEA:
+Apartment bill management table
+
+Initial - 
+Users are other students like us
+We’re admins who manage this system for students
+Goal: help students manage their apartment bill and pay everything on time
+
+Tenant Table:
+[tenantID, Username, Password, PropertyID (foreign key to property table) UserType (like system admin or user)]
+
+Employee Table:
+[landlordID, Username, Password, PropertyID (foreign key to property table), UserType (like system admin or user)]
+
+Property Table: ← details of apt
+[PropertyID, PropertyName, Address, TenantID (foreign key to user table)]
+
+Billing Table:
+[BillID, PropertyID (foreign key to property table), BillType (rent/electricity/water/gas), Amount ($), WhereToPay, Month, DueDate, DatePaid]
+
+MAINLY FOR THE ADMIN SIDE:
+Lease Table:
+[LeaseID, PropertyID (foreign key), UserID (foreign key), startDate, endDate, rent, depositAmount ($)]
+
+Maintenance Table:
+[MaintenanceID, PropertyID (foreign key), UserID (foreign key), IssueCategory, RequestDate, Status (pending, in progress, completed)]
+
+Users would be able to register their properties and track their rent, electricity, water, and gas consumption
+
+Change 1 - 
+User Table:
+ split into two tables Tenant and Employee tables
+
+Employee Table:
+includes Manager, Maintenance, and Front Desk
+Added PropertyID as a foreign key to Property Table
+Deleted usernames + passwords
+
+Tenant Table:
+removed UserType Attribute
+is of only one type so the UserType attribute is no longer needed
+Added PropertyID as a foreign key to Property Table
+Deleted usernames + passwords
+
+Billing Table:
+added DatePaid
+
+Maintenance Table:
+added RequestDate, Status, AssignedEmployee
+Know who is working on what and when
+
+Property Table:
+Removed TenantID, not needed
+added property name
+
+
+Tables in initialize_tables.sql:
+tenant: 
+tenant_id
+property_id (foreign key)
+employee:
+employee_id
+property_id (foreign key)
+user_type (maintenance/landlord)
+property: 
+property_id
+property_name
+addy
+billing: 
+bill_id
+property_id (foreign key)
+bill_type (rent/electricity/water)
+amount
+pay_to bill_month
+due_date
+date_paid
+lease: 
+lease_id 
+tenant_id (foreign key)
+property_id (foreign key)
+begin_date
+end_date
+rent
+deposit
+maintenance: 
+maintenance_id
+tenant_id (foreign key)
+property_id (foreign key)
+issue_category (plumbing/electrical)
+request_status (pending/in-progress/completed)
+request_date
+completed_date
+employee_id
+
+Things To-Do:
+4/4 meeting (to be completed by 4/11):
+Eisa: creating git server to share SQL files
+Git repo : ekamr2/455project (github.com) 
+David: create final E-R diagrams + add to presentation
+Entities
+Relationships
+Attributes
+Reasoning
+Ana: create presentation
+Katie: Create tables on SQL + ensure integrity constraints (data types)
+(currently on drive, needs to be moved to git) initialize_tables.sql
+David: Create fake data for tables
+Ana + Eisa: Manage user access for tenants vs landlords
+Katie: Create user requirements slides for presentation
+
+4/11 via Zoom: 
+https://illinois.zoom.us/j/82761708320?pwd=cWMwVStidHVCQnNCMk9QSldOZENIQT09 
+Meeting ID: 827 6170 8320
+Password: LOLZ---
+
+Do presentation slides
+Draft final report
+
+4/25: present
+User requirement analysis (group, no page limits)
+Data requirements, functional requirements
+Database design (group, no page limits)
+Conceptual:E-R diagram
+Integrity:three types of integrity constraints
+Logical:relational schema
+Physical:index design
+Security:user and access management FOR TENANT VS LANDLORD
+Database implementation and maintenance: experimental data
+Database system running results and analysis (screenshots and descriptions) (group, no page limits)
+Summary of personal contribution and experience (individual, at least1 pages per students)
+
+5/10: final report due
+
+Definitions:
+Week 1
+
+Relation schema
+Descriptions of the relation
+Relation name (Attribute 1, ..., Attribute n)
+E.g., Student (ID, Name, Age, Gender, Department, Term)
+
+Week 2 Part 2
+
+Entity integrity
+§ The attribute value in the primary key of the relation cannot be null
+§ Null: unknown or meaningless
+§ Relations correspond to entity sets in the physical world, and tuples
+correspond to entities. Entities are mutually distinguishable and
+uniquely identified by the primary key. If the primary key is empty,
+there will be unidentifiable entities, which is not allowed.
+
+Referential integrity
+• If the foreign key F k of the relation R 2 corresponds to the primary
+key P k of the relation R 1 , then the F k value of each tuple in R 2 is
+either equal to the R1 value of a tuple in R 1 , or is a null
+• If a tuple t2 of relation R 2 refers to a tuple t1 of relation R 1, then t1
+must exist
+• There are two possibilities for the value of D# in relation S
+• Null, indicating that the student has not been assigned to any
+department
+• If it is not empty, it must be the D# value of a tuple in the DEPT
+relation, indicating that the student cannot be assigned to a
+department that does not exist
+DEPT(D# , DN , DEAN)
+S(S# , SN , AGE , D#)
+
+User-defined integrity
+• Integrity constraints defined by users for specific applications
+• E.g., S# is an 8-bit integer
+§ System support
+• Entity integrity and referential integrity are supported by the
+database system
+• The database system shall provide mechanisms for defining and verifying the user-defined integrity
