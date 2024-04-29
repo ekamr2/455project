@@ -1,2 +1,7 @@
 USE User;
-GRANT SELECT, INSERT, DELETE, UPDATE ON Property, Lease, Maintanance, Bills  TO David; 
+GRANT SELECT, INSERT, DELETE, UPDATE ON Property, Lease, Maintenance, Bills  TO David; --in this case David would be an admin user
+
+Use User;
+GRANT INSERT, SELECT, DELETE, UPDATE ON Maintenance TO Handyman;
+Use User
+GRANT SELECT ON PROPERTY, LEASE, BILL TO Ana; -- in this case Ana is a resident.
