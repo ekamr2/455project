@@ -1,0 +1,2 @@
+USE User;
+GRANT SELECT, INSERT, DELETE, UPDATE ON Property, Lease, Maintanance, Bills  TO David; 
