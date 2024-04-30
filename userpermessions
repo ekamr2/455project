@@ -6,7 +6,7 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON Property, Lease, Maintenance, Bills  TO 
 --Use User
 --GRANT SELECT ON PROPERTY, LEASE, BILL TO Ana; -- in this case, Ana is a resident.
 
-CREATE ROLE tenet;
+CREATE ROLE tenant;
 CREATE ROLE landlord;
 CREATE ROLE maintenance;
 GRANT SELECT, INSERT, DELETE, UPDATE ON Tenant, Employee, Property, Billing, Lease, Maintenance TO landlord;
