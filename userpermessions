@@ -14,7 +14,6 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON Tenant, Employee, Property, Billing, Lea
 GRANT INSERT, SELECT, DELETE, UPDATE ON Maintenance TO handyman;
 GRANT SELECT ON Property, Lease, Billing TO tenet;
 
-GRANT admin TO David;
 GRANT landlord TO Katie;
 GRANT tenant TO Ana;
 GRANT maintenance TO Eisa;
